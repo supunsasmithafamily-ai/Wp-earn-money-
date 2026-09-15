@@ -1,46 +1,6 @@
 {
   "snapshots": [
     {
-      "timestamp": "2026-09-15T20:42:30.543Z",
-      "errorCount": 6,
-      "warningCount": 81,
-      "consecutiveFails": 0,
-      "corruptionLevel": 30,
-      "corruptionTier": "warning"
-    },
-    {
-      "timestamp": "2026-09-15T20:42:35.332Z",
-      "errorCount": 6,
-      "warningCount": 81,
-      "consecutiveFails": 0,
-      "corruptionLevel": 30,
-      "corruptionTier": "warning"
-    },
-    {
-      "timestamp": "2026-09-15T20:42:40.350Z",
-      "errorCount": 7,
-      "warningCount": 103,
-      "consecutiveFails": 0,
-      "corruptionLevel": 35,
-      "corruptionTier": "warning"
-    },
-    {
-      "timestamp": "2026-09-15T20:42:47.638Z",
-      "errorCount": 7,
-      "warningCount": 103,
-      "consecutiveFails": 0,
-      "corruptionLevel": 35,
-      "corruptionTier": "warning"
-    },
-    {
-      "timestamp": "2026-09-15T20:43:13.575Z",
-      "errorCount": 7,
-      "warningCount": 103,
-      "consecutiveFails": 0,
-      "corruptionLevel": 35,
-      "corruptionTier": "warning"
-    },
-    {
       "timestamp": "2026-09-15T20:43:55.653Z",
       "errorCount": 7,
       "warningCount": 103,
@@ -399,7 +359,47 @@
       "consecutiveFails": 0,
       "corruptionLevel": 0,
       "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:53:48.048Z",
+      "errorCount": 0,
+      "warningCount": 58,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:53:56.641Z",
+      "errorCount": 0,
+      "warningCount": 58,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:54:04.393Z",
+      "errorCount": 0,
+      "warningCount": 60,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:54:32.299Z",
+      "errorCount": 2,
+      "warningCount": 94,
+      "consecutiveFails": 0,
+      "corruptionLevel": 10,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:55:46.250Z",
+      "errorCount": 2,
+      "warningCount": 94,
+      "consecutiveFails": 0,
+      "corruptionLevel": 10,
+      "corruptionTier": "clean"
     }
   ],
-  "lastUpdated": "2026-09-15T20:53:38.588Z"
+  "lastUpdated": "2026-09-15T20:55:46.250Z"
 }

@@ -1,0 +1,405 @@
+{
+  "snapshots": [
+    {
+      "timestamp": "2026-09-15T20:42:11.654Z",
+      "errorCount": 6,
+      "warningCount": 81,
+      "consecutiveFails": 0,
+      "corruptionLevel": 30,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:42:16.012Z",
+      "errorCount": 6,
+      "warningCount": 81,
+      "consecutiveFails": 0,
+      "corruptionLevel": 30,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:42:22.300Z",
+      "errorCount": 6,
+      "warningCount": 81,
+      "consecutiveFails": 0,
+      "corruptionLevel": 30,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:42:30.543Z",
+      "errorCount": 6,
+      "warningCount": 81,
+      "consecutiveFails": 0,
+      "corruptionLevel": 30,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:42:35.332Z",
+      "errorCount": 6,
+      "warningCount": 81,
+      "consecutiveFails": 0,
+      "corruptionLevel": 30,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:42:40.350Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:42:47.638Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:43:13.575Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:43:55.653Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:44:22.811Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:44:32.381Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:44:39.411Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:44:46.828Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:44:50.838Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:44:53.504Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:44:58.687Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:45:01.382Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:45:20.385Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:45:38.325Z",
+      "errorCount": 7,
+      "warningCount": 103,
+      "consecutiveFails": 0,
+      "corruptionLevel": 35,
+      "corruptionTier": "warning"
+    },
+    {
+      "timestamp": "2026-09-15T20:46:56.731Z",
+      "errorCount": 0,
+      "warningCount": 0,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:47:06.985Z",
+      "errorCount": 0,
+      "warningCount": 5,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:47:13.932Z",
+      "errorCount": 1,
+      "warningCount": 5,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:47:16.716Z",
+      "errorCount": 1,
+      "warningCount": 5,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:47:33.519Z",
+      "errorCount": 1,
+      "warningCount": 5,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:47:39.202Z",
+      "errorCount": 1,
+      "warningCount": 5,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:47:45.381Z",
+      "errorCount": 1,
+      "warningCount": 6,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:47:55.965Z",
+      "errorCount": 1,
+      "warningCount": 6,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:02.077Z",
+      "errorCount": 1,
+      "warningCount": 6,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:11.146Z",
+      "errorCount": 1,
+      "warningCount": 6,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:16.165Z",
+      "errorCount": 1,
+      "warningCount": 6,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:22.925Z",
+      "errorCount": 1,
+      "warningCount": 6,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:26.889Z",
+      "errorCount": 1,
+      "warningCount": 6,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:32.019Z",
+      "errorCount": 1,
+      "warningCount": 8,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:41.967Z",
+      "errorCount": 1,
+      "warningCount": 61,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:48:47.466Z",
+      "errorCount": 1,
+      "warningCount": 61,
+      "consecutiveFails": 0,
+      "corruptionLevel": 5,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:49:08.890Z",
+      "errorCount": 2,
+      "warningCount": 99,
+      "consecutiveFails": 0,
+      "corruptionLevel": 10,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:49:54.224Z",
+      "errorCount": 2,
+      "warningCount": 99,
+      "consecutiveFails": 0,
+      "corruptionLevel": 10,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:50:29.783Z",
+      "errorCount": 0,
+      "warningCount": 0,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:50:35.041Z",
+      "errorCount": 0,
+      "warningCount": 0,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:50:50.543Z",
+      "errorCount": 0,
+      "warningCount": 58,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:51:11.152Z",
+      "errorCount": 0,
+      "warningCount": 59,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:51:14.614Z",
+      "errorCount": 0,
+      "warningCount": 59,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:51:19.498Z",
+      "errorCount": 0,
+      "warningCount": 59,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:51:22.674Z",
+      "errorCount": 0,
+      "warningCount": 59,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:51:28.056Z",
+      "errorCount": 0,
+      "warningCount": 59,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:51:52.659Z",
+      "errorCount": 0,
+      "warningCount": 61,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:52:54.225Z",
+      "errorCount": 2,
+      "warningCount": 99,
+      "consecutiveFails": 0,
+      "corruptionLevel": 10,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:52:56.610Z",
+      "errorCount": 0,
+      "warningCount": 58,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:53:01.326Z",
+      "errorCount": 0,
+      "warningCount": 58,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:53:04.561Z",
+      "errorCount": 0,
+      "warningCount": 58,
+      "consecutiveFails": 0,
+      "corruptionLevel": 0,
+      "corruptionTier": "clean"
+    }
+  ],
+  "lastUpdated": "2026-09-15T20:53:04.561Z"
+}

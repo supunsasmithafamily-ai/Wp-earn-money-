@@ -1,14 +1,6 @@
 {
   "snapshots": [
     {
-      "timestamp": "2026-09-15T20:43:55.653Z",
-      "errorCount": 7,
-      "warningCount": 103,
-      "consecutiveFails": 0,
-      "corruptionLevel": 35,
-      "corruptionTier": "warning"
-    },
-    {
       "timestamp": "2026-09-15T20:44:22.811Z",
       "errorCount": 7,
       "warningCount": 103,
@@ -399,7 +391,15 @@
       "consecutiveFails": 0,
       "corruptionLevel": 10,
       "corruptionTier": "clean"
+    },
+    {
+      "timestamp": "2026-09-15T20:55:50.630Z",
+      "errorCount": 2,
+      "warningCount": 94,
+      "consecutiveFails": 0,
+      "corruptionLevel": 10,
+      "corruptionTier": "clean"
     }
   ],
-  "lastUpdated": "2026-09-15T20:55:46.250Z"
+  "lastUpdated": "2026-09-15T20:55:50.630Z"
 }

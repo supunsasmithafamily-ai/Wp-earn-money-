@@ -1,4 +1,6 @@
-# WPLive App — Deployment Guide
+npm install
+cp .env.example .env.local   # then fill in real values
+npm run dev# WPLive App — Deployment Guide
 
 ## 1. GitHub වලට Upload කරන විදිය
 

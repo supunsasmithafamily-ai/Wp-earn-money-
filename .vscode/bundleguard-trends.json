@@ -1,47 +1,5 @@
 [
   {
-    "timestamp": 1789504131888,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
-    "timestamp": 1789504131889,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
-    "timestamp": 1789504131890,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
-    "timestamp": 1789504131891,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
-    "timestamp": 1789504131892,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
-    "timestamp": 1789504131893,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
-    "timestamp": 1789504131894,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
     "timestamp": 1789504131895,
     "totalGzipSize": 96532,
     "depCount": 3,
@@ -297,6 +255,48 @@
     "timestamp": 1789505935175,
     "totalGzipSize": 97103,
     "depCount": 4,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789543508413,
+    "totalGzipSize": 0,
+    "depCount": 4,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789543637801,
+    "totalGzipSize": 196451,
+    "depCount": 5,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789543637872,
+    "totalGzipSize": 196451,
+    "depCount": 5,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789543819818,
+    "totalGzipSize": 0,
+    "depCount": 5,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789544238012,
+    "totalGzipSize": 196451,
+    "depCount": 5,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789544285477,
+    "totalGzipSize": 196451,
+    "depCount": 5,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789544573835,
+    "totalGzipSize": 0,
+    "depCount": 5,
     "vulnCount": 0
   }
 ]

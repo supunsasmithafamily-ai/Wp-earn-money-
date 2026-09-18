@@ -14,6 +14,7 @@ import VideoCallsHome from '@/components/calls/VideoCallsHome';
 import WalletHome from '@/components/wallet/WalletHome';
 import SettingsHome from '@/components/settings/SettingsHome';
 import LiveFullPage from '@/components/live/LiveFullPage';
+import { LiveErrorBoundary } from '@/components/live/LiveErrorBoundary';
 import LiveFeedList from '@/components/live/LiveFeedList';
 import VideoCallOverlay from '@/components/calls/VideoCallOverlay';
 
@@ -61,7 +62,7 @@ export default function AppShell() {
     };
   }, [loading]);
 
-  const { activeTab, showLivePage } = useAppStore();
+  const { activeTab, showLivePage, setShowLivePage } = useAppStore();
   const { isInCall, callType, callPartner, endCall } = useCallStore();
   const ActiveComponent = tabComponents[activeTab];
 
@@ -154,7 +155,9 @@ export default function AppShell() {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="fixed inset-0 z-50 w-full max-w-lg mx-auto"
           >
-            <LiveFullPage />
+            <LiveErrorBoundary onClose={() => setShowLivePage(false)}>
+              <LiveFullPage />
+            </LiveErrorBoundary>
           </motion.div>
         )}
       </AnimatePresence>

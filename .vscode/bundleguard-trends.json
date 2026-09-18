@@ -1,11 +1,5 @@
 [
   {
-    "timestamp": 1789504131895,
-    "totalGzipSize": 96532,
-    "depCount": 3,
-    "vulnCount": 0
-  },
-  {
     "timestamp": 1789504131896,
     "totalGzipSize": 96532,
     "depCount": 3,
@@ -296,6 +290,12 @@
   {
     "timestamp": 1789544573835,
     "totalGzipSize": 0,
+    "depCount": 5,
+    "vulnCount": 0
+  },
+  {
+    "timestamp": 1789719929432,
+    "totalGzipSize": 196451,
     "depCount": 5,
     "vulnCount": 0
   }

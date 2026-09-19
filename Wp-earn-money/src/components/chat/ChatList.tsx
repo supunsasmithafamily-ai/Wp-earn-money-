@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Plus, MessageCircle, LogIn, UserPlus } from 'lucide-react';
+import { Search, Plus, MessageCircle, LogIn, UserPlus, X, Users } from 'lucide-react';
+import { collection, query, limit, onSnapshot } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 import { useChatList } from '@/hooks/useChatList';
 import { useAuth } from '@/hooks/useAuth';
 import { format, isToday, isYesterday, isThisWeek } from 'date-fns';
@@ -41,6 +43,29 @@ export default function ChatList() {
   const { chatList, isLoading: chatLoading } = useChatList();
   const [searchQuery, setSearchQuery] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [showDiscover, setShowDiscover] = useState(false);
+  const [realUsers, setRealUsers] = useState<{ uid: string; displayName: string; photoURL: string | null }[]>([]);
+
+  // Real registered users from Firestore (excluding yourself)
+  useEffect(() => {
+    if (!user) return;
+    const q = query(collection(db, 'users'), limit(30));
+    const unsubscribe = onSnapshot(q, (snap) => {
+      setRealUsers(
+        snap.docs
+          .filter((d) => d.id !== user.uid)
+          .map((d) => {
+            const data = d.data();
+            return {
+              uid: d.id,
+              displayName: data.displayName || 'User',
+              photoURL: data.photoURL || null,
+            };
+          })
+      );
+    });
+    return () => unsubscribe();
+  }, [user]);
 
   // Filter chats by search query
   const filteredChats = chatList.filter((chat) =>
@@ -51,9 +76,13 @@ export default function ChatList() {
     router.push(`/chat/${otherUid}`);
   };
 
+  const handleStartNewChat = (otherUid: string) => {
+    setShowDiscover(false);
+    router.push(`/chat/${otherUid}`);
+  };
+
   const handleRefresh = () => {
-    setIsRefreshing(true);
-    setTimeout(() => setIsRefreshing(false), 1000);
+    setShowDiscover(true);
   };
 
   // Auth loading state
@@ -306,6 +335,7 @@ export default function ChatList() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setShowDiscover(true)}
               className="mt-2 flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm text-white"
               style={{
                 background: 'linear-gradient(135deg, #25D366, #128C7E)',
@@ -331,7 +361,7 @@ export default function ChatList() {
         )}
       </div>
 
-      {/* FAB - New Chat Button */}
+      {/* FAB - New Chat / Discover Button */}
       <motion.button
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.9 }}
@@ -345,6 +375,61 @@ export default function ChatList() {
       >
         <Plus className="w-6 h-6 text-white" strokeWidth={2.5} />
       </motion.button>
+
+      {/* Discover People panel — real registered Firestore users */}
+      <AnimatePresence>
+        {showDiscover && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/60 flex items-end"
+            onClick={() => setShowDiscover(false)}
+          >
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+              className="w-full max-h-[75vh] bg-[#111B21] rounded-t-2xl flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+                <h3 className="text-white text-base font-semibold">Discover People</h3>
+                <button onClick={() => setShowDiscover(false)} className="p-1 text-white/60">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="overflow-y-auto px-4 py-3 space-y-1">
+                {realUsers.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-12 gap-2">
+                    <Users className="w-8 h-8 text-white/20" />
+                    <p className="text-white/40 text-sm text-center">
+                      No one else has signed up yet — invite a friend to start chatting for real.
+                    </p>
+                  </div>
+                ) : (
+                  realUsers.map((u) => (
+                    <button
+                      key={u.uid}
+                      onClick={() => handleStartNewChat(u.uid)}
+                      className="w-full flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-white/5 text-left"
+                    >
+                      <div
+                        className="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
+                        style={{ background: getAvatarColor(u.uid) }}
+                      >
+                        {getInitials(u.displayName)}
+                      </div>
+                      <span className="text-white text-sm font-medium">{u.displayName}</span>
+                    </button>
+                  ))
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

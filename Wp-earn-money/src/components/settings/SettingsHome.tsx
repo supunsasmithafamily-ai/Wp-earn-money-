@@ -31,6 +31,9 @@ import {
 import { GlassmorphismCard } from '@/components/three/GlassmorphismCard';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
+import { updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '@/lib/firebase';
 
 // ─── Types ────────────────────────────────────────────
 interface SettingItem {
@@ -84,6 +87,12 @@ export default function SettingsHome() {
     color: '#075E54',
   };
 
+  const [showEditProfile, setShowEditProfile] = useState(false);
+  const [editName, setEditName] = useState(displayUser.displayName);
+  const [editPhotoURL, setEditPhotoURL] = useState(user?.photoURL || '');
+  const [savingProfile, setSavingProfile] = useState(false);
+  const [profileSaveError, setProfileSaveError] = useState('');
+
   const [settings, setSettings] = useState({
     // Privacy
     showOnline: true,
@@ -109,81 +118,95 @@ export default function SettingsHome() {
   // ═══════════════════════════════════════════════════════
 
   const handleEditProfile = useCallback(() => {
-    alert('Edit Profile: Open profile editor to update name, photo, and bio.');
-    // TODO: Navigate to /settings/edit-profile or open a modal
-    // TODO: Fetch current profile from Firestore and pre-fill form
-    // TODO: Save changes to Firebase Auth & Firestore
-  }, []);
+    setEditName(displayUser.displayName);
+    setEditPhotoURL(user?.photoURL || '');
+    setProfileSaveError('');
+    setShowEditProfile(true);
+  }, [displayUser.displayName, user]);
+
+  const handleSaveProfile = useCallback(async () => {
+    if (!auth.currentUser) return;
+    const trimmedName = editName.trim();
+    if (!trimmedName) {
+      setProfileSaveError('Name cannot be empty.');
+      return;
+    }
+    setSavingProfile(true);
+    setProfileSaveError('');
+    try {
+      await updateProfile(auth.currentUser, {
+        displayName: trimmedName,
+        photoURL: editPhotoURL.trim() || null,
+      });
+      await setDoc(
+        doc(db, 'users', auth.currentUser.uid),
+        { displayName: trimmedName, photoURL: editPhotoURL.trim() || null },
+        { merge: true }
+      );
+      setShowEditProfile(false);
+    } catch (err) {
+      setProfileSaveError(err instanceof Error ? err.message : 'Failed to save profile.');
+    } finally {
+      setSavingProfile(false);
+    }
+  }, [editName, editPhotoURL]);
 
   const handlePhoneClick = useCallback(() => {
-    alert('Phone Number: Open phone number edit modal.\n\nCurrent: +1 (555) 123-4567\n\nSteps:\n1. Send OTP to current number\n2. Verify OTP\n3. Enter new number\n4. Verify new OTP\n5. Update in Firebase Auth');
-    // TODO: Open phone verification modal
-    // TODO: Use Firebase Auth updatePhoneNumber()
+    alert('Phone number editing is coming soon.');
   }, []);
 
   const handleEmailClick = useCallback(() => {
-    alert('Email: Open email edit modal.\n\nCurrent: alex.johnson@email.com\n\nSteps:\n1. Verify current password\n2. Enter new email\n3. Send verification link\n4. Confirm in email inbox');
-    // TODO: Open email change modal
-    // TODO: Use Firebase Auth verifyBeforeUpdateEmail()
-  }, []);
+    alert(`Your account email is ${displayUser.email || 'not set'}. Email editing is coming soon.`);
+  }, [displayUser.email]);
 
   const handle2FAClick = useCallback(() => {
-    alert('Two-Factor Authentication: Open 2FA settings.\n\nStatus: Enabled\n\nOptions:\n• Disable 2FA (requires current password)\n• Change backup codes\n• Switch to SMS authenticator');
-    // TODO: Open 2FA management modal
-    // TODO: Use Firebase Auth multi-factor settings
+    alert('Two-factor authentication is coming soon.');
   }, []);
 
   const handleStreamQualityClick = useCallback(() => {
-    alert('Stream Quality: Open quality selector.\n\nCurrent: Auto\n\nOptions:\n• Auto (recommended)\n• Low (360p, saves data)\n• Medium (720p)\n• High (1080p)\n• Ultra (1440p, requires WiFi)');
-    // TODO: Open quality picker bottom sheet
-    // TODO: Save preference to Firestore user settings
+    alert('Stream quality selection is coming soon — streams currently use a standard automatic quality.');
   }, []);
 
   const handleMinGiftValueClick = useCallback(() => {
-    alert('Minimum Gift Value: Open gift threshold editor.\n\nCurrent: 10 coins\n\nOptions:\n• No minimum\n• 10 coins\n• 50 coins\n• 100 coins\n• 500 coins\n• Custom amount');
-    // TODO: Open minimum gift value picker
-    // TODO: Save to Firestore user settings
+    alert('Setting a minimum gift value is coming soon.');
   }, []);
 
   const handleConnectedWalletsClick = useCallback(() => {
-    alert('Connected Wallets: Open wallet management.\n\nConnected: 1 wallet\n• TRC20 (USDT)\n\nActions:\n• Add new wallet\n• Remove wallet\n• Set default wallet');
-    // TODO: Open wallet management modal
-    // TODO: Fetch from Firestore user.wallets[]
+    alert('Connected wallet management is coming soon. You can withdraw coins directly from the Wallet tab.');
   }, []);
 
   const handleTransactionHistoryClick = useCallback(() => {
-    alert('Transaction History: Navigate to full transaction list.\n\nShows all coin purchases, gifts sent/received, and withdrawals.');
-    // TODO: Navigate to /wallet/transactions
-    // TODO: Fetch from Firestore transactions collection
-  }, []);
+    router.push('/');
+    // The Wallet tab already shows real recent transactions — a dedicated
+    // full-history page can be added as a follow-up if needed.
+  }, [router]);
 
   const handleWithdrawalSettingsClick = useCallback(() => {
-    alert('Withdrawal Settings: Open withdrawal configuration.\n\nCurrent network: TRC20\nWallet: 0x••••••••4a2b\nMinimum: 1,000 coins');
-    // TODO: Open withdrawal settings modal
-    // TODO: Fetch from Firestore user.withdrawalSettings
+    alert('Withdrawal network/wallet configuration is coming soon. You can withdraw coins directly from the Wallet tab.');
   }, []);
 
   const handleLanguageClick = useCallback(() => {
-    alert('Language: Open language selector.\n\nCurrent: English\n\nAvailable:\n• English\n• Spanish\n• French\n• Arabic\n• Chinese\n• Hindi');
-    // TODO: Open language picker bottom sheet
-    // TODO: Save to localStorage and Firestore
+    alert('Language selection is coming soon — the app currently runs in English/Sinhala mixed UI.');
   }, []);
 
-  const handleClearCacheClick = useCallback(() => {
+  const handleClearCacheClick = useCallback(async () => {
     const confirmed = confirm(
-      'Clear Cache?\n\nThis will:\n• Clear image cache\n• Clear chat cache\n• Log you out of all devices\n\nThis action cannot be undone.'
+      'Clear Cache?\n\nThis will clear locally stored data and log you out.\n\nThis action cannot be undone.'
     );
     if (confirmed) {
-      alert('Cache cleared successfully! Please log in again.');
-      // TODO: Clear localStorage, sessionStorage, IndexedDB
-      // TODO: Sign out from Firebase Auth
-      // TODO: Navigate to /login
+      try {
+        localStorage.clear();
+        sessionStorage.clear();
+      } catch {
+        // Storage access can fail in some restricted browser contexts — ignore.
+      }
+      await logout();
+      router.push('/login');
     }
-  }, []);
+  }, [logout, router]);
 
   const handleAboutClick = useCallback(() => {
-    alert('About Wp-earn-money\n\nVersion: 1.0.0\nBuild: 2026.04.02\n\nA WhatsApp-inspired mobile-first PWA with live streaming, virtual gifts, and crypto economy.\n\nPowered by Next.js, Firebase, Agora, and OxaPay.');
-    // TODO: Open About page or modal
+    alert('About Wp-earn-money\n\nA WhatsApp-inspired mobile-first PWA with live streaming, virtual gifts, and a coin economy.\n\nPowered by Next.js, Firebase, Agora, and OxaPay.');
   }, []);
 
   const handleLogoutClick = useCallback(async () => {
@@ -586,6 +609,76 @@ export default function SettingsHome() {
           </p>
         </motion.div>
       </motion.div>
+
+      {/* Edit Profile Modal */}
+      {showEditProfile && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/60"
+          onClick={() => !savingProfile && setShowEditProfile(false)}
+        >
+          <div
+            className="w-full max-w-lg rounded-t-2xl p-5"
+            style={{ background: '#1F2C34' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-base font-semibold mb-4" style={{ color: '#E9EDEF' }}>
+              Edit Profile
+            </h3>
+
+            {profileSaveError && (
+              <div
+                className="mb-3 px-3 py-2 rounded-lg text-sm"
+                style={{ background: 'rgba(220, 38, 38, 0.12)', color: '#FCA5A5' }}
+              >
+                {profileSaveError}
+              </div>
+            )}
+
+            <label className="block text-xs mb-1.5" style={{ color: '#8696A0' }}>
+              Display Name
+            </label>
+            <input
+              type="text"
+              value={editName}
+              onChange={(e) => setEditName(e.target.value)}
+              className="w-full mb-4 px-3.5 py-2.5 rounded-xl text-sm outline-none"
+              style={{ background: '#2A3942', color: '#E9EDEF' }}
+              maxLength={50}
+            />
+
+            <label className="block text-xs mb-1.5" style={{ color: '#8696A0' }}>
+              Photo URL (optional)
+            </label>
+            <input
+              type="text"
+              value={editPhotoURL}
+              onChange={(e) => setEditPhotoURL(e.target.value)}
+              placeholder="https://..."
+              className="w-full mb-5 px-3.5 py-2.5 rounded-xl text-sm outline-none"
+              style={{ background: '#2A3942', color: '#E9EDEF' }}
+            />
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowEditProfile(false)}
+                disabled={savingProfile}
+                className="flex-1 py-3 rounded-xl text-sm font-semibold"
+                style={{ background: '#2A3942', color: '#E9EDEF' }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveProfile}
+                disabled={savingProfile}
+                className="flex-1 py-3 rounded-xl text-sm font-semibold disabled:opacity-60"
+                style={{ background: '#25D366', color: '#0B141A' }}
+              >
+                {savingProfile ? 'Saving…' : 'Save'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

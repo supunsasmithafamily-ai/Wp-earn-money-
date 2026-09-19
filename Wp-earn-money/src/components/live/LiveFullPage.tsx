@@ -470,6 +470,7 @@ export default function LiveFullPage() {
     leaveStream: leaveAgoraStream,
     setMicEnabled,
     setCameraEnabled,
+    switchCamera,
     localVideoTrack,
     remoteVideoTrack,
     error: agoraError,
@@ -1001,20 +1002,22 @@ export default function LiveFullPage() {
                 </div>
               </div>
 
-              {/* Right: Coins + Gift */}
+              {/* Right: Coins + Gift (viewer only — a host can't gift themselves) */}
               <div className="flex items-center gap-2">
                 <CoinIcon size="sm" balance={coinBalance} />
-                <motion.button
-                  onClick={() => { if (isViewing) setShowGiftPanel(!showGiftPanel); }}
-                  className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center"
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Gift
-                    className={`w-4 h-4 ${
-                      showGiftPanel ? 'text-yellow-400' : 'text-white'
-                    }`}
-                  />
-                </motion.button>
+                {isViewing && (
+                  <motion.button
+                    onClick={() => setShowGiftPanel(!showGiftPanel)}
+                    className="w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center"
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <Gift
+                      className={`w-4 h-4 ${
+                        showGiftPanel ? 'text-yellow-400' : 'text-white'
+                      }`}
+                    />
+                  </motion.button>
+                )}
               </div>
             </div>
 
@@ -1167,7 +1170,10 @@ export default function LiveFullPage() {
               {/* Camera Flip */}
               {isHosting && (
                 <motion.button
-                  onClick={() => setIsFrontCamera(!isFrontCamera)}
+                  onClick={() => {
+                    setIsFrontCamera(!isFrontCamera);
+                    switchCamera();
+                  }}
                   className="flex flex-col items-center gap-0.5"
                   whileTap={{ scale: 0.9 }}
                 >
@@ -1266,39 +1272,27 @@ export default function LiveFullPage() {
 
             {/* Right group */}
             <div className="flex items-center gap-2">
-              {/* Gift Button */}
-              <motion.button
-                onClick={() => { if (isViewing) setShowGiftPanel(!showGiftPanel); }}
-                className="flex flex-col items-center gap-0.5"
-                whileTap={{ scale: 0.9 }}
-              >
-                <div
-                  className={`w-10 h-10 rounded-full backdrop-blur-xl border flex items-center justify-center ${
-                    showGiftPanel
-                      ? 'bg-gradient-to-br from-yellow-500 to-teal-500 border-yellow-400/60'
-                      : 'bg-[#1F2C34]/90 border-[#2A3942]/60'
-                  }`}
-                >
-                  <Gift className="w-4 h-4 text-white" />
-                </div>
-                <span
-                  className={`text-[9px] ${showGiftPanel ? 'text-yellow-400' : 'text-gray-500'}`}
-                >
-                  Gift
-                </span>
-              </motion.button>
-
-              {/* Heart Button (host can also send hearts) */}
-              {isHosting && (
+              {/* Gift Button (viewer only — a host can't gift themselves) */}
+              {isViewing && (
                 <motion.button
-                  onClick={handleSendHeart}
+                  onClick={() => setShowGiftPanel(!showGiftPanel)}
                   className="flex flex-col items-center gap-0.5"
                   whileTap={{ scale: 0.9 }}
                 >
-                  <div className="w-10 h-10 rounded-full bg-pink-500/90 backdrop-blur-xl border border-pink-400/60 flex items-center justify-center">
-                    <Heart className="w-4 h-4 text-white fill-white" />
+                  <div
+                    className={`w-10 h-10 rounded-full backdrop-blur-xl border flex items-center justify-center ${
+                      showGiftPanel
+                        ? 'bg-gradient-to-br from-yellow-500 to-teal-500 border-yellow-400/60'
+                        : 'bg-[#1F2C34]/90 border-[#2A3942]/60'
+                    }`}
+                  >
+                    <Gift className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-[9px] text-pink-400">Heart</span>
+                  <span
+                    className={`text-[9px] ${showGiftPanel ? 'text-yellow-400' : 'text-gray-500'}`}
+                  >
+                    Gift
+                  </span>
                 </motion.button>
               )}
 

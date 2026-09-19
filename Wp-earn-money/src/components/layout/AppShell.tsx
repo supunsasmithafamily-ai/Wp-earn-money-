@@ -174,12 +174,14 @@ export default function AppShell() {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="fixed inset-0 z-[60] w-full max-w-lg mx-auto"
           >
-            <VideoCallOverlay
-              channelName={callChannelName}
-              partnerName={callPartner}
-              callType={callType}
-              onEndCall={endCall}
-            />
+            <LiveErrorBoundary label="call" onClose={endCall}>
+              <VideoCallOverlay
+                channelName={callChannelName}
+                partnerName={callPartner}
+                callType={callType}
+                onEndCall={endCall}
+              />
+            </LiveErrorBoundary>
           </motion.div>
         )}
       </AnimatePresence>

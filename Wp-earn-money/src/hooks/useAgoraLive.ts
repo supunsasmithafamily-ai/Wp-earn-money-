@@ -21,6 +21,7 @@ export interface UseAgoraLiveReturn {
   leaveStream: () => void;
   setMicEnabled: (enabled: boolean) => void;
   setCameraEnabled: (enabled: boolean) => void;
+  switchCamera: () => Promise<void>;
   localVideoTrack: ICameraVideoTrack | null;
   remoteVideoTrack: IRemoteVideoTrack | null;
   isBroadcasting: boolean;
@@ -255,6 +256,22 @@ export function useAgoraLive(): UseAgoraLiveReturn {
     localVideoTrackRef.current?.setEnabled(enabled).catch(() => {});
   }, []);
 
+  // Switch between front/back camera on mobile (host only).
+  const switchCamera = useCallback(async () => {
+    const track = localVideoTrackRef.current;
+    if (!track) return;
+    try {
+      const cameras = await AgoraRTC.getCameras();
+      if (cameras.length < 2) return; // only one camera available — nothing to switch to
+      const currentLabel = track.getTrackLabel?.() || '';
+      const nextCamera = cameras.find((c) => c.label !== currentLabel) || cameras[1];
+      await track.setDevice(nextCamera.deviceId);
+    } catch {
+      // Some devices/browsers don't support switching mid-stream — fail silently
+      // rather than crashing the live view.
+    }
+  }, []);
+
   // Leave the stream
   const leaveStream = useCallback(() => {
     cleanupClient();
@@ -280,6 +297,7 @@ export function useAgoraLive(): UseAgoraLiveReturn {
     leaveStream,
     setMicEnabled,
     setCameraEnabled,
+    switchCamera,
     localVideoTrack,
     remoteVideoTrack,
     isBroadcasting,

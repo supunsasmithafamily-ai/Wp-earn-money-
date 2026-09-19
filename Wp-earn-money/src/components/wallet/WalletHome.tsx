@@ -67,9 +67,19 @@ export default function WalletHome() {
   const [purchasingId, setPurchasingId] = useState<string | null>(null);
   const { user } = useAuth();
 
+  const [purchaseError, setPurchaseError] = useState('');
+
   const handleBuyPackage = async (pkgId: string) => {
     if (purchasingId) return;
     setPurchasingId(pkgId);
+    setPurchaseError('');
+
+    // Open the tab synchronously, in direct response to the click — mobile
+    // browsers block window.open() called after an `await`, since by then
+    // it's no longer considered part of the original user gesture. We
+    // point it at the real payment URL once the fetch below resolves.
+    const paymentTab = window.open('', '_blank', 'noopener,noreferrer');
+
     try {
       const res = await fetch('/api/oxapay/create-payment', {
         method: 'POST',
@@ -81,10 +91,20 @@ export default function WalletHome() {
       });
       const data = await res.json();
       if (data.success && data.paymentUrl) {
-        window.open(data.paymentUrl, '_blank', 'noopener,noreferrer');
+        if (paymentTab) {
+          paymentTab.location.href = data.paymentUrl;
+        } else {
+          // Popup was blocked despite our best effort — fall back to a
+          // same-tab redirect so the purchase can still go through.
+          window.location.href = data.paymentUrl;
+        }
+      } else {
+        paymentTab?.close();
+        setPurchaseError(data.error || 'Could not start payment. Please try again.');
       }
     } catch {
-      // Silently ignore — payment gateway not reachable
+      paymentTab?.close();
+      setPurchaseError('Network error — please check your connection and try again.');
     } finally {
       setPurchasingId(null);
     }
@@ -190,6 +210,14 @@ export default function WalletHome() {
         className="mb-6"
       >
         <h2 className="text-lg font-semibold mb-3" style={{ color: '#E9EDEF' }}>Coin Packages</h2>
+        {purchaseError && (
+          <div
+            className="mb-3 px-3 py-2.5 rounded-lg text-sm"
+            style={{ background: 'rgba(220, 38, 38, 0.12)', border: '1px solid rgba(220, 38, 38, 0.3)', color: '#FCA5A5' }}
+          >
+            {purchaseError}
+          </div>
+        )}
         <div className="grid grid-cols-2 gap-3">
           {coinPackages.map((pkg, index) => (
             <motion.div
